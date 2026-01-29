@@ -6,7 +6,7 @@ GBDA302 Week 3 Example 1: Instructions Screen with Back button
 
 ## Authors
 
-Karen Cochrane and David Han
+Mackenzie Leu
 
 ---
 
@@ -35,5 +35,6 @@ N/A
 ## GenAI
 
 The code was written by Dr. Karen Cochrane but she used GenAI to write the comments.
+GenAI was used to edit code (Mackenzie Leu)
 
 ---

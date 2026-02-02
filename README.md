@@ -35,5 +35,6 @@ N/A
 ## GenAI
 
 The code was written by Dr. Karen Cochrane but she used GenAI to write the comments.
+GenAI was used to edit code (Mackenzie Leu)
 
 ---

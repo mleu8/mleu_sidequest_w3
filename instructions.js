@@ -18,22 +18,29 @@ function drawInstr() {
   fill(0);
   textAlign(CENTER, TOP);
   textSize(36);
-  text("Instructions", width / 2, 80);
+  text("How to Play", width / 2, 80);
 
   // ---- Instruction text ----
   textSize(18);
+  textAlign(CENTER, TOP);
 
-  // \n creates a line break in the text
-  // This is useful for simple multi-line instructions
   const lines =
-    "Press the game button.\n" + "You have a chance to win or lose!";
+    "You are making a pizza for a date.\n\n" +
+    "Each round, you will see a hint about your date’s preferences in a speech bubble.\n" +
+    "Decide whether to ADD or SKIP each topping.\n\n" +
+    "Your choices affect the compatibility bar at the top of the screen.\n" +
+    "Good choices raise compatibility. Bad choices lower it.\n\n" +
+    "Some toppings are risky and may have unpredictable results.\n\n" +
+    "When the pizza goes into the oven, the moment of truth begins.\n" +
+    "If your compatibility is above 70%, you win.\n" +
+    "If it is below 70%, you lose.";
 
-  text(lines, width / 2, 160);
+  text(lines, width / 2, 160, width * 0.8);
 
   // ---- Back button ----
   // This button lets the player return to the start screen
   const backBtn = {
-    x: width / 2, // centred horizontally
+    x: width / 2,
     y: 560,
     w: 220,
     h: 70,
@@ -71,7 +78,7 @@ function instrKeyPressed() {
     currentScreen = "start";
   }
 
-  // B key is an additional, explicit shortcut for “back”
+  // B key is an additional shortcut for “back”
   if (key === "b" || key === "B") {
     currentScreen = "start";
   }
@@ -80,9 +87,6 @@ function instrKeyPressed() {
 // ------------------------------
 // Button drawing helper (instructions screen)
 // ------------------------------
-// This function is only responsible for drawing the button.
-// It is kept separate so the visual style can be changed
-// without touching input or game logic.
 function drawInstrButton({ x, y, w, h, label }) {
   rectMode(CENTER);
 

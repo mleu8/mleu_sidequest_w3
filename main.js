@@ -33,6 +33,29 @@ function setup() {
   // Sets a default font for all text() calls
   // (This can be changed later per-screen if you want.)
   textFont("sans-serif");
+
+  // Initialize topping choices
+  if (typeof sauceAdded === "undefined") sauceAdded = false;
+  if (typeof cheeseAdded === "undefined") cheeseAdded = false;
+  if (typeof onionAdded === "undefined") onionAdded = false;
+  if (typeof pepperoniAdded === "undefined") pepperoniAdded = false;
+  if (typeof mushroomAdded === "undefined") mushroomAdded = false;
+
+  // Compatibility starts at 100% and updates after choices are made
+  if (typeof compatibility === "undefined") compatibility = 100;
+  if (typeof compatibilityTarget === "undefined") compatibilityTarget = 100;
+}
+
+function applyCompatibility(isCorrect) {
+  const curr =
+    typeof compatibilityTarget !== "undefined"
+      ? compatibilityTarget
+      : compatibility;
+  if (!isCorrect) {
+    compatibilityTarget = Math.max(0, curr - 20);
+  } else {
+    compatibilityTarget = curr;
+  }
 }
 
 // ------------------------------
@@ -50,9 +73,22 @@ function draw() {
 
   if (currentScreen === "start") drawStart();
   else if (currentScreen === "instr") drawInstr();
+  else if (currentScreen === "first_topping") drawFirstTopping();
+  else if (currentScreen === "cheese_topping") drawCheeseTopping();
+  else if (currentScreen === "onion_topping") drawOnionTopping();
+  else if (currentScreen === "pepperoni_topping") drawPepperoniTopping();
+  else if (currentScreen === "mushroom_topping") drawMushroomTopping();
+  else if (currentScreen === "oven") drawBakeScreen();
   else if (currentScreen === "game") drawGame();
   else if (currentScreen === "win") drawWin();
+  else if (currentScreen === "good") drawGood();
   else if (currentScreen === "lose") drawLose();
+
+  // Smoothly animate compatibility toward its target value
+  if (typeof compatibilityTarget !== "undefined") {
+    // p5.lerp is available; smooth factor controls speed
+    compatibility = lerp(compatibility, compatibilityTarget, 0.06);
+  }
 
   // (Optional teaching note)
   // This “if/else chain” is a very common early approach.
@@ -75,10 +111,18 @@ function mousePressed() {
 
   if (currentScreen === "start") startMousePressed();
   else if (currentScreen === "instr") instrMousePressed();
+  else if (currentScreen === "first_topping") firstToppingMousePressed?.();
+  else if (currentScreen === "cheese_topping") cheeseToppingMousePressed?.();
+  else if (currentScreen === "onion_topping") onionToppingMousePressed?.();
+  else if (currentScreen === "pepperoni_topping")
+    pepperoniToppingMousePressed?.();
+  else if (currentScreen === "mushroom_topping")
+    mushroomToppingMousePressed?.();
   else if (currentScreen === "game") gameMousePressed();
   // The ?.() means “call this function only if it exists”
   // This prevents errors if a screen doesn’t implement a handler.
   else if (currentScreen === "win") winMousePressed?.();
+  else if (currentScreen === "good") goodMousePressed?.();
   else if (currentScreen === "lose") loseMousePressed?.();
 }
 
@@ -96,8 +140,15 @@ function keyPressed() {
 
   if (currentScreen === "start") startKeyPressed();
   else if (currentScreen === "instr") instrKeyPressed();
+  else if (currentScreen === "first_topping") firstToppingKeyPressed?.();
+  else if (currentScreen === "cheese_topping") cheeseToppingKeyPressed?.();
+  else if (currentScreen === "onion_topping") onionToppingKeyPressed?.();
+  else if (currentScreen === "pepperoni_topping")
+    pepperoniToppingKeyPressed?.();
+  else if (currentScreen === "mushroom_topping") mushroomToppingKeyPressed?.();
   else if (currentScreen === "game") gameKeyPressed?.();
   else if (currentScreen === "win") winKeyPressed?.();
+  else if (currentScreen === "good") goodKeyPressed?.();
   else if (currentScreen === "lose") loseKeyPressed?.();
 }
 

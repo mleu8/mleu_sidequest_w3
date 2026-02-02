@@ -10,19 +10,24 @@
 // drawLose() is called from main.js
 // only when currentScreen === "lose"
 function drawLose() {
-  // Red-tinted background to communicate failure
   background(255, 210, 210);
 
   fill(0);
   textAlign(CENTER, CENTER);
 
-  // Main message
-  textSize(40);
-  text("You Lose!", width / 2, 300);
+  // Title
+  textSize(48);
+  text("🔴 YOU LOSE", width / 2, height / 2 - 120);
 
-  // Instruction text
+  // Body text
   textSize(20);
-  text("Click or press R to return to Start.", width / 2, 360);
+  const bodyText =
+    "Yikes… not quite. 😬🍕\nThe pizza's a little questionable and the chemistry didn't quite rise.\nNot every topping choice lands, and that's okay.\nThere's always another chance to learn their taste.";
+  text(bodyText, width / 2, height / 2, width - 100, 300);
+
+  // Instruction
+  textSize(18);
+  text("Press R to try again.", width / 2, height - 80);
 }
 
 // ------------------------------
@@ -31,6 +36,8 @@ function drawLose() {
 // Any mouse click returns the player to the start screen
 // (no buttons needed for this simple end state)
 function loseMousePressed() {
+  compatibility = 100;
+  compatibilityTarget = 100;
   currentScreen = "start";
 }
 
@@ -40,6 +47,8 @@ function loseMousePressed() {
 // R is commonly used for “restart” in games
 function loseKeyPressed() {
   if (key === "r" || key === "R") {
+    compatibility = 100;
+    compatibilityTarget = 100;
     currentScreen = "start";
   }
 }
